@@ -82,7 +82,7 @@
 </head>
 
 <body
-    class="bg-background-light dark:bg-background-dark text-[#0d141c] dark:text-slate-100 font-display flex flex-col h-screen overflow-hidden">
+    class="relative bg-background-light dark:bg-background-dark text-[#0d141c] dark:text-slate-100 font-display flex flex-col overflow-y-auto">
 
     <!-- Header -->
     <header class="bg-white dark:bg-slate-900 z-50 shadow-sm border-b border-slate-100 dark:border-slate-800 shrink-0">
@@ -162,10 +162,18 @@
             <span class="text-[10px] text-slate-400 ml-2">10:32</span>
         </div>
 
+        <!-- User Message (Right) -->
+        <div class="flex flex-col items-end gap-1">
+            <div class="chat-user p-4 max-w-[85%] shadow-sm">
+                <p class="text-sm">Makasih Min.</p>
+            </div>
+            <span class="text-[10px] text-slate-400 mr-2">10:35</span>
+        </div>
     </div>
 
     <!-- Message Input -->
-    <div class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 p-4 shrink-0 z-10">
+    <div
+        class="sticky bottom-0 w-full bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 p-4 shrink-0 z-10">
         <div class="flex items-center gap-2">
             <button
                 class="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full">
