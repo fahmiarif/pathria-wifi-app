@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Detail Tiket</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Chat bubble styles */
+        .chat-user {
+            background-color: #258cf4;
+            color: white;
+            border-radius: 1.25rem 1.25rem 0 1.25rem;
+        }
+
+        .chat-admin {
+            background-color: white;
+            color: #0d141c;
+            border-radius: 1.25rem 1.25rem 1.25rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .dark .chat-admin {
+            background-color: #1e293b;
+            color: white;
+            border-color: #334155;
+        }
+
+        /* Bottom Sheet Styles */
+        .bottom-sheet-backdrop {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .bottom-sheet-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .bottom-sheet {
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .bottom-sheet.open {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-[#0d141c] dark:text-slate-100 font-display flex flex-col h-screen overflow-hidden">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-slate-900 z-50 shadow-sm border-b border-slate-100 dark:border-slate-800 shrink-0">
+        <div class="flex items-center justify-between p-4">
+            <a href="ticket.html"
+                class="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+
+            <h1 class="text-lg font-bold">Detail Tiket</h1>
+
+            <button onclick="openSheet()"
+                class="size-10 flex items-center justify-center rounded-full text-primary hover:bg-blue-50 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">info</span>
+            </button>
+        </div>
+
+        <!-- Quick Status Strip (Visible always) -->
+        <div class="px-4 pb-2">
+            <div
+                class="bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-300 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center justify-center gap-2">
+                <div class="flex items-center gap-1">
+                    <span class="relative flex h-2 w-2">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
+                    </span>
+                    STATUS: DIPROSES
+                </div>
+                <span class="text-slate-300 dark:text-slate-600">|</span>
+                <span class="font-normal text-[10px]">Est. Selesai: 2 Jam</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Chat Area -->
+    <div class="flex-1 overflow-y-auto p-4 space-y-6 scroll-smooth bg-slate-50 dark:bg-slate-900/50"
+        id="chat-container">
+
+        <!-- Date divider -->
+        <div class="flex justify-center pt-2">
+            <span
+                class="bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400 text-[10px] font-bold px-3 py-1 rounded-full">
+                HARI INI, 10:30
+            </span>
+        </div>
+
+        <!-- User Message (Right) -->
+        <div class="flex flex-col items-end gap-1">
+            <div class="chat-user p-4 max-w-[85%] shadow-sm">
+                <p class="text-sm">Halo min, internet saya mati tiba-tiba. Di modem lampu PON nya kedip-kedip merah.
+                    Tolong dicek ya.</p>
+            </div>
+            <span class="text-[10px] text-slate-400 mr-2">10:30</span>
+        </div>
+
+        <!-- System Message -->
+        <div class="flex justify-center my-4">
+            <div class="flex items-center gap-2 text-slate-400 text-xs">
+                <span class="material-symbols-outlined text-sm">info</span>
+                <span>Tiket dibuat & diteruskan ke teknisi</span>
+            </div>
+        </div>
+
+        <!-- Admin Message (Left) -->
+        <div class="flex flex-col items-start gap-1">
+            <div class="flex items-center gap-2 mb-1 ml-2">
+                <div
+                    class="size-6 bg-primary rounded-full flex items-center justify-center text-white text-[10px] font-bold">
+                    CS</div>
+                <span class="text-xs font-bold text-slate-600 dark:text-slate-400">Customer Service</span>
+            </div>
+            <div class="chat-admin p-4 max-w-[85%] shadow-sm">
+                <p class="text-sm">Baik Kak, mohon maaf atas ketidaknyamanannya. Laporan sudah kami terima. Teknisi kami
+                    akan segera melakukan pengecekan ke lokasi/server. Mohon ditunggu sebentar ya.</p>
+            </div>
+            <span class="text-[10px] text-slate-400 ml-2">10:32</span>
+        </div>
+
+    </div>
+
+    <!-- Message Input -->
+    <div class="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 p-4 shrink-0 z-10">
+        <div class="flex items-center gap-2">
+            <button
+                class="p-2 text-slate-400 hover:text-primary transition-colors hover:bg-slate-50 dark:hover:bg-slate-800 rounded-full">
+                <span class="material-symbols-outlined">add_photo_alternate</span>
+            </button>
+            <input type="text" placeholder="Tulis pesan balasan..."
+                class="flex-1 rounded-full border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary focus:ring-primary px-4 py-2 text-sm">
+            <button
+                class="p-2 bg-primary text-white rounded-full shadow-lg shadow-primary/20 active:scale-95 transition-transform flex items-center justify-center">
+                <span class="material-symbols-outlined text-xl">send</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Sheet Component -->
+    <div id="backdrop" onclick="closeSheet()"
+        class="bottom-sheet-backdrop fixed inset-0 bg-black/60 z-[60] backdrop-blur-[2px]"></div>
+    <div id="sheet"
+        class="bottom-sheet fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 rounded-t-[2rem] z-[70] shadow-[0_-5px_40px_rgba(0,0,0,0.1)] max-h-[85vh] overflow-y-auto">
+        <!-- Handle -->
+        <div class="flex justify-center pt-3 pb-1" onclick="closeSheet()">
+            <div class="w-12 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full"></div>
+        </div>
+
+        <!-- Sheet Content -->
+        <div class="p-6 pt-2 pb-8">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                    <span class="text-[10px] font-bold tracking-wider text-slate-400 uppercase mb-1 block">Judul
+                        Laporan</span>
+                    <h2 class="font-bold text-xl leading-snug text-slate-800 dark:text-white">Internet Mati Total (LOS
+                        Merah)</h2>
+                </div>
+                <button onclick="closeSheet()"
+                    class="bg-slate-100 dark:bg-slate-800 p-2 rounded-full text-slate-500 hover:bg-slate-200 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <!-- Detail Grid -->
+            <div class="grid grid-cols-1 gap-3">
+
+                <div
+                    class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="size-10 bg-blue-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-primary">
+                            <span class="material-symbols-outlined">confirmation_number</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">ID Tiket</p>
+                            <p class="font-bold text-sm tracking-wide font-mono">#TCK-001923</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="size-10 bg-orange-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-orange-500">
+                            <span class="material-symbols-outlined">router</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Kategori</p>
+                            <p class="font-bold text-sm">Kendala Teknis</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="size-10 bg-red-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-red-500">
+                            <span class="material-symbols-outlined">location_on</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Area Gangguan</p>
+                            <p class="font-bold text-sm">Bekasi Utara, Kota Bekasi</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-700">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="size-10 bg-green-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-green-500">
+                            <span class="material-symbols-outlined">timer</span>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-medium">Estimasi Selesai</p>
+                            <p class="font-bold text-sm">± 2 Jam Lagi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action -->
+            <button
+                class="w-full mt-6 py-4 rounded-2xl border border-red-200 text-red-500 font-bold text-sm hover:bg-red-50 transition-colors active:scale-95">
+                Batalkan Tiket Ini
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Bottom Sheet Logic
+        const backdrop = document.getElementById('backdrop');
+        const sheet = document.getElementById('sheet');
+
+        function openSheet() {
+            backdrop.classList.add('open');
+            sheet.classList.add('open');
+        }
+
+        function closeSheet() {
+            backdrop.classList.remove('open');
+            sheet.classList.remove('open');
+        }
+
+        // Auto scroll to bottom
+        window.onload = function () {
+            const container = document.getElementById('chat-container');
+            container.scrollTop = container.scrollHeight;
+        }
+    </script>
+</body>
+
+</html>

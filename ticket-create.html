@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Buat Tiket Baru</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        /* Checkbox styling for categories */
+        .cat-radio:checked+div {
+            border-color: #258cf4;
+            background-color: #eff6ff;
+            color: #258cf4;
+        }
+
+        .dark .cat-radio:checked+div {
+            background-color: #1e293b;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0d141c] dark:text-slate-100 font-display pb-28">
+
+    <!-- Header -->
+    <header
+        class="bg-white dark:bg-slate-900 sticky top-0 z-50 shadow-sm border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center gap-4 p-4">
+            <a href="ticket.html"
+                class="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <h1 class="text-lg font-bold">Lapor Masalah</h1>
+        </div>
+    </header>
+
+    <div class="max-w-md mx-auto p-4 space-y-6">
+
+        <!-- Category Selection -->
+        <div>
+            <label class="block text-sm font-bold mb-3">Kategori Masalah</label>
+            <div class="grid grid-cols-2 gap-3">
+                <label class="cursor-pointer group">
+                    <input type="radio" name="category" class="cat-radio sr-only" checked>
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:border-blue-200">
+                        <span class="material-symbols-outlined text-3xl">wifi_off</span>
+                        <span class="text-xs font-bold">Internet Mati</span>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="category" class="cat-radio sr-only">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:border-blue-200">
+                        <span class="material-symbols-outlined text-3xl">speed</span>
+                        <span class="text-xs font-bold">Koneksi Lambat</span>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="category" class="cat-radio sr-only">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:border-blue-200">
+                        <span class="material-symbols-outlined text-3xl">router</span>
+                        <span class="text-xs font-bold">Perangkat</span>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="category" class="cat-radio sr-only">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 flex flex-col items-center gap-2 transition-all hover:border-blue-200">
+                        <span class="material-symbols-outlined text-3xl">help</span>
+                        <span class="text-xs font-bold">Lainnya</span>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Form Inputs -->
+        <div class="space-y-4">
+
+            <!-- Area Selection -->
+            <div>
+                <label class="block text-sm font-bold mb-2">Area / Lokasi Gangguan</label>
+                <div class="relative">
+                    <button type="button" onclick="toggleAreaDropdown()" id="area-btn"
+                        class="w-full text-left rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary focus:ring-primary px-4 py-3 text-sm flex justify-between items-center bg-white dark:bg-slate-800 border shadow-sm group">
+                        <span id="selected-area"
+                            class="text-slate-500 group-hover:text-slate-700 dark:group-hover:text-slate-300 transition-colors">Pilih
+                            Kecamatan (Bekasi)</span>
+                        <span class="material-symbols-outlined text-slate-400">arrow_drop_down</span>
+                    </button>
+                    <!-- Dropdown Content -->
+                    <div id="area-dropdown"
+                        class="hidden absolute w-full mt-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-xl z-20 flex flex-col overflow-hidden animate-scale-up origin-top">
+                        <div
+                            class="p-3 border-b border-slate-100 dark:border-slate-700 sticky top-0 bg-white dark:bg-slate-800">
+                            <div class="relative">
+                                <span
+                                    class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+                                <input type="text" id="area-search" onkeyup="filterAreas()"
+                                    placeholder="Cari kecamatan..."
+                                    class="w-full rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900 text-sm pl-9 pr-3 py-2.5 focus:border-primary focus:ring-primary">
+                            </div>
+                        </div>
+                        <div class="overflow-y-auto max-h-56 p-1" id="area-list">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                    <input type="hidden" id="area-value" name="area">
+                </div>
+            </div>
+
+            <!-- Map Mockup -->
+            <div>
+                <label class="block text-sm font-bold mb-2">Titik Lokasi Gangguan</label>
+                <div
+                    class="relative h-60 w-full rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-700 shadow-sm group">
+                    <!-- Map Container -->
+                    <div id="map"
+                        class="h-full w-full bg-slate-100 dark:bg-slate-800 z-0 text-slate-400 flex items-center justify-center">
+                        <span class="text-xs">Memuat Peta...</span>
+                    </div>
+
+                    <!-- Center Marker Overlay -->
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[400] pointer-events-none -mt-4 transition-transform group-active:scale-110">
+                        <div class="relative">
+                            <span
+                                class="material-symbols-outlined text-4xl text-red-500 drop-shadow-md">location_on</span>
+                            <span
+                                class="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-1 bg-black/30 blur-[2px] rounded-full"></span>
+                        </div>
+                    </div>
+
+                    <!-- Address Info Overlay -->
+                    <div class="absolute top-3 left-3 right-14 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm p-3 rounded-xl border border-white/50 dark:border-slate-700 shadow-lg z-[400] transition-all"
+                        id="address-card">
+                        <div class="flex items-start gap-2">
+                            <span class="material-symbols-outlined text-sm text-primary mt-0.5">near_me</span>
+                            <div>
+                                <p class="text-[10px] text-slate-500 font-bold uppercase">Lokasi Terpilih</p>
+                                <p class="text-xs font-bold leading-tight line-clamp-2" id="selected-address">Jl.
+                                    Jendral Sudirman, Bekasi Barat, Kota Bekasi</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layout Buttons -->
+                    <div class="absolute bottom-3 right-3 flex flex-col gap-2 z-[400]">
+                        <button type="button" onclick="locateMe()"
+                            class="size-10 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl shadow-lg flex items-center justify-center hover:bg-slate-50 transition-colors active:scale-95 border border-slate-100 dark:border-slate-700">
+                            <span class="material-symbols-outlined">my_location</span>
+                        </button>
+                    </div>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-1.5 ml-1">*Geser peta untuk menyesuaikan titik lokasi</p>
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold mb-2">Judul Laporan</label>
+                <input type="text" placeholder="Contoh: Lampu PON Merah"
+                    class="w-full rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary focus:ring-primary px-4 py-3 text-sm">
+            </div>
+
+            <div>
+                <label class="block text-sm font-bold mb-2">Deskripsi Detail</label>
+                <textarea rows="4" placeholder="Jelaskan masalah yang Anda alami..."
+                    class="w-full rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-800 focus:border-primary focus:ring-primary px-4 py-3 text-sm"></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div>
+                <label class="block text-sm font-bold mb-2">Foto Pendukung (Opsional)</label>
+                <div
+                    class="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-xl p-6 flex flex-col items-center justify-center text-slate-400 bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined text-3xl mb-2">add_a_photo</span>
+                    <span class="text-xs">Ketuk untuk upload foto</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bottom Action -->
+    <div
+        class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50">
+        <div class="max-w-md mx-auto">
+            <button onclick="submitTicket()"
+                class="w-full bg-primary text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-transform flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-sm">send</span>
+                Kirim Laporan
+            </button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Init Map
+        let map;
+        // Default Bekasi
+        const defaultLat = -6.241586;
+        const defaultLng = 106.992416;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Leaflet
+            if (document.getElementById('map')) {
+                map = L.map('map', {
+                    center: [defaultLat, defaultLng],
+                    zoom: 15,
+                    zoomControl: false, // Custom position if needed
+                    attributionControl: false
+                });
+
+                L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                    maxZoom: 19
+                }).addTo(map);
+
+                // Mock address update on drag
+                map.on('moveend', function () {
+                    const center = map.getCenter();
+                    updateAddress(center.lat, center.lng);
+                });
+            }
+        });
+
+        function locateMe() {
+            const btn = document.querySelector('button[onclick="locateMe()"] span');
+            btn.classList.add('animate-spin');
+
+            // Simulate GPS delay
+            setTimeout(() => {
+                btn.classList.remove('animate-spin');
+                map.flyTo([defaultLat, defaultLng], 17); // Reset to default/current
+
+                // Show 'Found' toast logic could go here
+                document.getElementById('selected-address').innerText = "Lokasi Saya Saat Ini (GPS Akurat)";
+                document.getElementById('selected-address').classList.add('text-primary');
+                setTimeout(() => document.getElementById('selected-address').classList.remove('text-primary'), 1000);
+            }, 1500);
+        }
+
+        function updateAddress(lat, lng) {
+            // In real app, reverse geocode here. Mocking for now.
+            const addresses = [
+                "Jl. Ahmad Yani No. 12, Bekasi Selatan",
+                "Jl. Raya Pekayon, Jatiasih, Bekasi",
+                "Perumahan Gading Mas, Blok B2, Bekasi Utara",
+                "Jl. Ir. H. Juanda, Bekasi Timur"
+            ];
+            const randomAddr = addresses[Math.floor(Math.random() * addresses.length)];
+            document.getElementById('selected-address').innerText = randomAddr + ` [${lat.toFixed(4)}, ${lng.toFixed(4)}]`;
+        }
+
+        // Bottom Sheet Logic (If present)
+        // ...
+
+        // Submit Logic (Existing)
+        function submitTicket() {
+            const btn = document.querySelector('button[onclick="submitTicket()"]');
+            const originalContent = btn.innerHTML;
+
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Mengirim...';
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                // Navigate to detail page as if created
+                window.location.href = 'ticket-detail.html?new=true';
+            }, 1500);
+        }
+
+        // Area Dropdown Logic
+        // ... existing area logic ...
+        const areas = [
+            "Bantargebang", "Bekasi Barat", "Bekasi Selatan", "Bekasi Timur", "Bekasi Utara",
+            "Jatiasih", "Jatisampurna", "Medan Satria", "Mustika Jaya", "Pondok Gede",
+            "Pondok Melati", "Rawalumbu"
+        ];
+
+        const dropdown = document.getElementById('area-dropdown');
+        const areaList = document.getElementById('area-list');
+        const areaBtn = document.getElementById('area-btn');
+        const selectedAreaText = document.getElementById('selected-area');
+        const areaInput = document.getElementById('area-value');
+
+        // Init List
+        function initAreaList() {
+            if (!areaList) return;
+            areaList.innerHTML = '';
+            areas.forEach(area => {
+                const btn = document.createElement('button');
+                btn.className = 'w-full text-left px-4 py-3 hover:bg-slate-50 dark:hover:bg-slate-700/50 rounded-lg text-sm transition-colors flex items-center gap-2';
+                btn.innerHTML = `<span class="material-symbols-outlined text-slate-400 text-sm">location_on</span> ${area}`;
+                btn.onclick = () => selectArea(area);
+                areaList.appendChild(btn);
+            });
+        }
+        initAreaList();
+
+        function toggleAreaDropdown() {
+            if (dropdown) dropdown.classList.toggle('hidden');
+        }
+
+        function selectArea(area) {
+            selectedAreaText.innerText = area + ", Kota Bekasi";
+            selectedAreaText.classList.remove('text-slate-500');
+            selectedAreaText.classList.add('text-slate-800', 'dark:text-white', 'font-bold');
+            areaInput.value = area;
+            dropdown.classList.add('hidden');
+
+            // Move map to random location in 'Bekasi' to simulate jump
+            if (map) {
+                map.flyTo([defaultLat + (Math.random() * 0.01), defaultLng + (Math.random() * 0.01)], 15);
+                updateAddress(defaultLat, defaultLng);
+            }
+        }
+
+        function filterAreas() {
+            const filter = document.getElementById('area-search').value.toLowerCase();
+            const buttons = areaList.getElementsByTagName('button');
+            for (let i = 0; i < buttons.length; i++) {
+                const txtValue = buttons[i].innerText;
+                if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                    buttons[i].style.display = "";
+                } else {
+                    buttons[i].style.display = "none";
+                }
+            }
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (event) {
+            if (areaBtn && dropdown && !areaBtn.contains(event.target) && !dropdown.contains(event.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
+</body>
+
+</html>

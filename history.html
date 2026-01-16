@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Riwayat Transaksi</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0d141c] dark:text-slate-100 font-display pb-28">
+
+    <!-- Top Header -->
+    <header
+        class="bg-white dark:bg-slate-900 sticky top-0 z-50 shadow-sm border-b border-slate-100 dark:border-slate-800">
+        <div class="flex items-center justify-between p-4 pb-2">
+            <h1 class="text-xl font-bold">Aktivitas</h1>
+            <button class="bg-slate-100 dark:bg-slate-800 p-2 rounded-full hover:bg-slate-200 transition-colors">
+                <span class="material-symbols-outlined">filter_list</span>
+            </button>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex px-4 items-center gap-2 overflow-x-auto no-scrollbar pb-3 pt-1">
+            <button
+                class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap shadow-md shadow-primary/20">Semua</button>
+            <button
+                class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap hover:bg-slate-50">Jajan</button>
+            <button
+                class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap hover:bg-slate-50">Top
+                Up</button>
+            <button
+                class="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-500 px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap hover:bg-slate-50">Tagihan</button>
+        </div>
+    </header>
+
+    <div class="p-4 space-y-6">
+
+        <!-- Search -->
+        <div class="relative">
+            <span
+                class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+            <input type="text" placeholder="Cari transaksi..."
+                class="w-full bg-white dark:bg-slate-800 border-none rounded-xl py-3 pl-10 pr-4 shadow-sm text-sm focus:ring-2 focus:ring-primary/50">
+        </div>
+
+        <!-- This Month -->
+        <div>
+            <h3 class="font-bold text-lg mb-3">Hari Ini</h3>
+            <div class="space-y-3">
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between active:scale-[0.99] transition-transform">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="size-12 rounded-full bg-blue-50 dark:bg-slate-700 flex items-center justify-center text-blue-500">
+                            <span class="material-symbols-outlined">wifi</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">WiFi Home 50Mbps</p>
+                            <p class="text-xs text-slate-500">Tagihan • 10:30</p>
+                        </div>
+                    </div>
+                    <p class="font-bold text-sm text-red-500">-350.000</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between active:scale-[0.99] transition-transform">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="size-12 rounded-full bg-green-50 dark:bg-slate-700 flex items-center justify-center text-green-500">
+                            <span class="material-symbols-outlined">add_card</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Top Up Saldo</p>
+                            <p class="text-xs text-slate-500">BCA VA • 09:15</p>
+                        </div>
+                    </div>
+                    <p class="font-bold text-sm text-green-500">+1.000.000</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Yesterday -->
+        <div>
+            <h3 class="font-bold text-lg mb-3">Kemarin</h3>
+            <div class="space-y-3">
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between active:scale-[0.99] transition-transform">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="size-12 rounded-full bg-orange-50 dark:bg-slate-700 flex items-center justify-center text-orange-500">
+                            <span class="material-symbols-outlined">fastfood</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Kopi Kenangan</p>
+                            <p class="text-xs text-slate-500">QRIS • 15:45</p>
+                        </div>
+                    </div>
+                    <p class="font-bold text-sm text-red-500">-24.000</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last Week -->
+        <div>
+            <h3 class="font-bold text-lg mb-3">Minggu Lalu</h3>
+            <div class="space-y-3">
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between active:scale-[0.99] transition-transform">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="size-12 rounded-full bg-purple-50 dark:bg-slate-700 flex items-center justify-center text-purple-500">
+                            <span class="material-symbols-outlined">joystick</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">Steam Wallet</p>
+                            <p class="text-xs text-slate-500">Voucher • 02 Jan</p>
+                        </div>
+                    </div>
+                    <p class="font-bold text-sm text-red-500">-150.000</p>
+                </div>
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-xl p-4 shadow-sm flex items-center justify-between active:scale-[0.99] transition-transform">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="size-12 rounded-full bg-yellow-50 dark:bg-slate-700 flex items-center justify-center text-yellow-500">
+                            <span class="material-symbols-outlined">bolt</span>
+                        </div>
+                        <div>
+                            <p class="font-bold text-sm">PLN Token</p>
+                            <p class="text-xs text-slate-500">Listrik • 01 Jan</p>
+                        </div>
+                    </div>
+                    <p class="font-bold text-sm text-red-500">-50.000</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Nav (Shared Component simulation) -->
+    <div
+        class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 px-6 py-3 flex justify-between items-center z-50 rounded-t-2xl shadow-[0_-5px_10px_rgba(0,0,0,0.02)]">
+        <a href="dashboard.html"
+            class="flex flex-col items-center gap-1 text-[#49739c] dark:text-slate-400 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined">home</span>
+            <span class="text-[10px] font-bold">Beranda</span>
+        </a>
+        <button class="flex flex-col items-center gap-1 text-primary transition-colors">
+            <span class="material-symbols-outlined">receipt_long</span>
+            <span class="text-[10px] font-bold">Riwayat</span>
+        </button>
+        <div class="relative -top-6">
+            <button onclick="window.location.href='pay.html'"
+                class="flex items-center justify-center size-14 rounded-full bg-primary text-white shadow-lg shadow-primary/30 active:scale-95 transition-transform border-4 border-white dark:border-slate-900">
+                <span class="material-symbols-outlined text-2xl">qr_code_scanner</span>
+            </button>
+        </div>
+        <button onclick="window.location.href='ticket.html'"
+            class="flex flex-col items-center gap-1 text-[#49739c] dark:text-slate-400 transition-colors">
+            <span class="material-symbols-outlined">confirmation_number</span>
+            <span class="text-[10px] font-bold">Tiket Saya</span>
+        </button>
+        <button onclick="window.location.href='profile.html'"
+            class="flex flex-col items-center gap-1 text-[#49739c] dark:text-slate-400 transition-colors">
+            <span class="material-symbols-outlined">person</span>
+            <span class="text-[10px] font-bold">Profil</span>
+        </button>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Isi Saldo</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        .nominal-radio:checked+div {
+            border-color: #258cf4;
+            background-color: #eff6ff;
+            color: #258cf4;
+        }
+
+        .dark .nominal-radio:checked+div {
+            background-color: #1e293b;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0d141c] dark:text-slate-100 font-display pb-28">
+
+    <!-- Top Header -->
+    <header
+        class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 sticky top-0 z-50 border-b border-slate-100 dark:border-slate-800">
+        <a href="dashboard.html"
+            class="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+            <span class="material-symbols-outlined">arrow_back</span>
+        </a>
+        <h1 class="text-lg font-bold">Isi Saldo</h1>
+    </header>
+
+    <div class="max-w-md mx-auto p-4 space-y-6">
+        <!-- Current Balance -->
+        <div class="bg-primary rounded-2xl p-6 text-white shadow-lg shadow-primary/20 relative overflow-hidden">
+            <div class="relative z-10">
+                <p class="text-sm font-medium opacity-80">Saldo Saat Ini</p>
+                <h2 class="text-3xl font-bold mt-1">Rp 1.250.000</h2>
+            </div>
+            <!-- Decor -->
+            <div class="absolute top-[-20%] right-[-10%] w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+            <div class="absolute bottom-[-20%] left-[-10%] w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+        </div>
+
+        <!-- Nominal Selection -->
+        <div>
+            <h3 class="font-bold text-lg mb-4">Pilih Nominal</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <label class="cursor-pointer group">
+                    <input type="radio" name="nominal" class="nominal-radio sr-only" value="10000">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 transition-all hover:border-blue-200">
+                        <p class="font-bold text-lg">Rp 10.000</p>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="nominal" class="nominal-radio sr-only" value="20000">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 transition-all hover:border-blue-200">
+                        <p class="font-bold text-lg">Rp 20.000</p>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="nominal" class="nominal-radio sr-only" value="50000" checked>
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 transition-all hover:border-blue-200">
+                        <p class="font-bold text-lg">Rp 50.000</p>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="nominal" class="nominal-radio sr-only" value="100000">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 transition-all hover:border-blue-200">
+                        <p class="font-bold text-lg">Rp 100.000</p>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="nominal" class="nominal-radio sr-only" value="200000">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 transition-all hover:border-blue-200">
+                        <p class="font-bold text-lg">Rp 200.000</p>
+                    </div>
+                </label>
+                <label class="cursor-pointer group">
+                    <input type="radio" name="nominal" class="nominal-radio sr-only" value="500000">
+                    <div
+                        class="border-2 border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 rounded-xl p-4 transition-all hover:border-blue-200">
+                        <p class="font-bold text-lg">Rp 500.000</p>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Manual Input -->
+            <div class="mt-4">
+                <label class="block text-sm font-medium text-slate-500 mb-2">Atau masukkan nominal lain</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500 font-bold">Rp</span>
+                    <input type="number" placeholder="0"
+                        class="w-full pl-12 pr-4 py-3 rounded-xl border-slate-200 focus:border-primary focus:ring-primary dark:bg-slate-800 dark:border-slate-700 font-bold text-lg">
+                </div>
+            </div>
+        </div>
+
+        <!-- Method Section -->
+        <div>
+            <h3 class="font-bold text-lg mb-4">Metode Pembayaran</h3>
+            <button
+                class="w-full flex items-center justify-between p-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm hover:bg-slate-50 transition-colors">
+                <div class="flex items-center gap-3">
+                    <div class="bg-blue-50 p-2 rounded-lg">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Bank_Central_Asia.svg/1200px-Bank_Central_Asia.svg.png"
+                            alt="BCA" class="w-8 h-auto">
+                    </div>
+                    <div class="text-left">
+                        <p class="font-bold text-sm">BCA Virtual Account</p>
+                        <p class="text-xs text-slate-500">Biaya Admin Rp 1.000</p>
+                    </div>
+                </div>
+                <span class="material-symbols-outlined text-slate-400">chevron_right</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Bottom Action -->
+    <div
+        class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 p-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] z-50">
+        <div class="max-w-md mx-auto">
+            <button onclick="window.location.href='topup-confirm.html'"
+                class="w-full bg-primary text-white font-bold py-3.5 px-8 rounded-xl shadow-lg shadow-primary/30 active:scale-95 transition-transform">
+                Lanjut Pembayaran
+            </button>
+        </div>
+    </div>
+
+</body>
+
+</html>

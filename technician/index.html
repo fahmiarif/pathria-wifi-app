@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Teknisi - Pathria PPOB</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Toggle Switch */
+        .toggle-checkbox:checked {
+            right: 0;
+            border-color: #258cf4;
+        }
+
+        .toggle-checkbox:checked+.toggle-label {
+            background-color: #258cf4;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display pb-20">
+
+    <!-- Header -->
+    <header
+        class="bg-white dark:bg-slate-900 sticky top-0 z-30 shadow-sm border-b border-slate-100 dark:border-slate-800">
+        <div class="px-5 py-4 flex justify-between items-center">
+            <div>
+                <p class="text-xs text-slate-500 font-medium">Selamat Pagi,</p>
+                <h1 class="text-xl font-bold">Ahmad Teknisi</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <!-- Status Toggle -->
+                <div class="relative inline-block w-12 mr-2 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="toggle" id="toggle"
+                        class="toggle-checkbox absolute block w-6 h-6 rounded-full bg-white border-4 appearance-none cursor-pointer border-slate-300 checked:right-0 checked:border-green-500 transition-all duration-300 top-0" />
+                    <label for="toggle"
+                        class="toggle-label block overflow-hidden h-6 rounded-full bg-slate-300 cursor-pointer checked:bg-green-500 transition-all duration-300"></label>
+                </div>
+                <img src="https://ui-avatars.com/api/?name=Ahmad+Teknisi&background=random"
+                    class="size-10 rounded-full border-2 border-white shadow-sm">
+            </div>
+        </div>
+
+        <!-- Date Scroller (Simplified) -->
+        <div class="px-5 pb-4 flex items-center justify-between gap-2 overflow-x-auto no-scrollbar">
+            <div
+                class="flex flex-col items-center bg-primary text-white px-3 py-2 rounded-xl shadow-lg shadow-primary/30 min-w-[3.5rem]">
+                <span class="text-[10px] font-medium opacity-80">SEN</span>
+                <span class="text-lg font-bold">16</span>
+            </div>
+            <div
+                class="flex flex-col items-center bg-white dark:bg-slate-800 text-slate-400 px-3 py-2 rounded-xl border border-slate-100 dark:border-slate-700 min-w-[3.5rem]">
+                <span class="text-[10px] font-medium">SEL</span>
+                <span class="text-lg font-bold">17</span>
+            </div>
+            <div
+                class="flex flex-col items-center bg-white dark:bg-slate-800 text-slate-400 px-3 py-2 rounded-xl border border-slate-100 dark:border-slate-700 min-w-[3.5rem]">
+                <span class="text-[10px] font-medium">RAB</span>
+                <span class="text-lg font-bold">18</span>
+            </div>
+            <div
+                class="flex flex-col items-center bg-white dark:bg-slate-800 text-slate-400 px-3 py-2 rounded-xl border border-slate-100 dark:border-slate-700 min-w-[3.5rem]">
+                <span class="text-[10px] font-medium">KAM</span>
+                <span class="text-lg font-bold">19</span>
+            </div>
+            <div
+                class="flex flex-col items-center bg-white dark:bg-slate-800 text-slate-400 px-3 py-2 rounded-xl border border-slate-100 dark:border-slate-700 min-w-[3.5rem]">
+                <span class="text-[10px] font-medium">JUM</span>
+                <span class="text-lg font-bold">20</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="p-5 space-y-6">
+
+        <!-- Summary Stats -->
+        <div class="grid grid-cols-2 gap-4">
+            <div
+                class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                <div
+                    class="size-8 bg-blue-50 dark:bg-slate-700 text-blue-500 rounded-lg flex items-center justify-center mb-2">
+                    <span class="material-symbols-outlined text-lg">assignment</span>
+                </div>
+                <p class="text-2xl font-bold">5</p>
+                <p class="text-xs text-slate-500">Tugas Hari Ini</p>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-800 p-4 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm">
+                <div
+                    class="size-8 bg-green-50 dark:bg-slate-700 text-green-500 rounded-lg flex items-center justify-center mb-2">
+                    <span class="material-symbols-outlined text-lg">check_circle</span>
+                </div>
+                <p class="text-2xl font-bold">2</p>
+                <p class="text-xs text-slate-500">Selesai</p>
+            </div>
+        </div>
+
+        <!-- Mini Map -->
+        <div class="rounded-2xl overflow-hidden shadow-sm border border-slate-200 dark:border-slate-700 relative h-36">
+            <div id="mini-map" class="w-full h-full z-0 bg-slate-200"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none z-10"></div>
+            <div class="absolute bottom-3 left-3 z-20 text-white">
+                <p class="text-xs font-bold flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">map</span>
+                    Peta Rute Hari Ini
+                </p>
+            </div>
+            <button
+                class="absolute bottom-3 right-3 z-20 bg-white text-slate-800 text-xs font-bold px-3 py-1.5 rounded-lg shadow hover:bg-slate-50">
+                Buka Peta
+            </button>
+        </div>
+
+        <!-- Task List -->
+        <div>
+            <h2 class="font-bold text-lg mb-4">Daftar Tugas</h2>
+            <div class="space-y-4">
+
+                <!-- Active Task Card -->
+                <div onclick="window.location.href='job-detail.html'"
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-blue-200 dark:border-blue-900 shadow-lg shadow-blue-500/5 relative overflow-hidden cursor-pointer active:scale-[0.98] transition-transform">
+                    <div
+                        class="absolute top-0 right-0 bg-blue-500 text-white text-[10px] font-bold px-3 py-1 rounded-bl-xl">
+                        SEDANG JALAN
+                    </div>
+
+                    <div class="flex items-start gap-3 mb-3">
+                        <div
+                            class="size-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center shrink-0">
+                            <span class="material-symbols-outlined text-slate-500">person</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-800 dark:text-slate-100">Ibu Sri Wahyuni</h3>
+                            <p class="text-xs text-slate-500 line-clamp-1">Perum. Galaxy Indah Blok A No. 5</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span
+                            class="bg-red-50 text-red-600 border border-red-100 text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">wifi_off</span> LOS Merah
+                        </span>
+                        <span
+                            class="bg-slate-50 dark:bg-slate-700 text-slate-600 dark:text-slate-300 border border-slate-100 dark:border-slate-600 text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">distance</span> 2.5 km
+                        </span>
+                    </div>
+
+                    <button
+                        class="w-full bg-blue-600 text-white font-bold py-2.5 rounded-xl shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">navigation</span>
+                        Lanjut Navigasi
+                    </button>
+                </div>
+
+                <!-- Next Task Card -->
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer active:scale-[0.98] transition-transform">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="size-10 rounded-full bg-slate-50 dark:bg-slate-700/50 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-slate-400">store</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-100">Warung Kopi Joss</h3>
+                                <p class="text-xs text-slate-500 line-clamp-1">Jl. Raya Jatiasih No. 88</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">14:00</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-orange-50 text-orange-600 border border-orange-100 text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">router</span> Ganti Modem
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Next Task Card -->
+                <div
+                    class="bg-white dark:bg-slate-800 rounded-2xl p-4 border border-slate-100 dark:border-slate-700 shadow-sm cursor-pointer active:scale-[0.98] transition-transform">
+                    <div class="flex items-start justify-between mb-3">
+                        <div class="flex items-start gap-3">
+                            <div
+                                class="size-10 rounded-full bg-slate-50 dark:bg-slate-700/50 flex items-center justify-center shrink-0">
+                                <span class="material-symbols-outlined text-slate-400">home</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-slate-800 dark:text-slate-100">Bpk. Hartono</h3>
+                                <p class="text-xs text-slate-500 line-clamp-1">Cluster Mutiara Gading, Blok C2</p>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">16:30</span>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="bg-slate-50 text-slate-600 border border-slate-100 text-[10px] font-bold px-2 py-1 rounded-lg flex items-center gap-1">
+                            <span class="material-symbols-outlined text-xs">settings_ethernet</span> Crimping
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Bottom Nav -->
+    <nav
+        class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pb-safe z-40">
+        <div class="flex justify-around items-center h-16">
+            <a href="index.html" class="flex flex-col items-center gap-1 text-primary">
+                <span class="material-symbols-outlined">home_repair_service</span>
+                <span class="text-[10px] font-bold">Tugas</span>
+            </a>
+            <a href="history.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+                <span class="material-symbols-outlined">history</span>
+                <span class="text-[10px] font-medium">Riwayat</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+                <span class="material-symbols-outlined">person</span>
+                <span class="text-[10px] font-medium">Profil</span>
+            </a>
+        </div>
+    </nav>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        // Init Daily Map Snippet
+        const map = L.map('mini-map', {
+            zoomControl: false,
+            attributionControl: false,
+            dragging: false,
+            scrollWheelZoom: false,
+            doubleClickZoom: false
+        }).setView([-6.241586, 106.992416], 13);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png').addTo(map);
+
+        // Add Markers
+        const locations = [
+            [-6.241586, 106.992416],
+            [-6.231586, 106.982416],
+            [-6.251586, 107.002416]
+        ];
+
+        locations.forEach(loc => {
+            L.circleMarker(loc, {
+                radius: 6,
+                fillColor: "#258cf4",
+                color: "#fff",
+                weight: 2,
+                opacity: 1,
+                fillOpacity: 1
+            }).addTo(map);
+        });
+
+        // Toggle Logic
+        const toggle = document.getElementById('toggle');
+        toggle.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                // Online Logic
+            } else {
+                // Offline Logic
+            }
+        });
+    </script>
+</body>
+
+</html>

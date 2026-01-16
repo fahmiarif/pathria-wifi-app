@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Profil Teknisi - Pathria PPOB</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display pb-20">
+
+    <!-- Header / Cover -->
+    <div class="bg-primary h-40 relative">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+        <div class="absolute top-4 right-4">
+            <button class="text-white p-2 rounded-full hover:bg-white/10">
+                <span class="material-symbols-outlined">settings</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Profile Info -->
+    <div class="px-5 -mt-12 relative z-10 mb-6">
+        <div class="flex items-end justify-between">
+            <div class="relative">
+                <img src="https://ui-avatars.com/api/?name=Ahmad+Teknisi&background=random&size=128"
+                    class="size-24 rounded-full border-4 border-white dark:border-slate-800 shadow-md bg-white">
+                <div class="absolute bottom-1 right-1 size-5 bg-green-500 border-2 border-white dark:border-slate-800 rounded-full"
+                    title="Online"></div>
+            </div>
+            <div class="mb-2">
+                <span
+                    class="bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 px-3 py-1 rounded-full text-xs font-bold">Teknisi
+                    Senior</span>
+            </div>
+        </div>
+        <div class="mt-3">
+            <h1 class="text-2xl font-bold">Ahmad Teknisi</h1>
+            <p class="text-slate-500 text-sm">ID: TK-2023-009 • Sejak 2023</p>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <main class="p-5 pt-0 space-y-6">
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-3 gap-3">
+            <div
+                class="bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm text-center">
+                <p class="text-xs text-slate-500 mb-1">Total Tugas</p>
+                <p class="text-xl font-bold text-slate-800 dark:text-white">1,240</p>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm text-center">
+                <p class="text-xs text-slate-500 mb-1">Rating</p>
+                <div class="flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined text-orange-400 text-sm">star</span>
+                    <p class="text-xl font-bold text-slate-800 dark:text-white">4.9</p>
+                </div>
+            </div>
+            <div
+                class="bg-white dark:bg-slate-800 p-3 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm text-center">
+                <p class="text-xs text-slate-500 mb-1">Poin</p>
+                <p class="text-xl font-bold text-primary">850</p>
+            </div>
+        </div>
+
+        <!-- Menu Section -->
+        <div class="space-y-4">
+            <h3 class="font-bold text-slate-800 dark:text-white">Akun & Pengaturan</h3>
+
+            <div
+                class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm divide-y divide-slate-100 dark:divide-slate-700">
+
+                <a href="#"
+                    class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <div
+                        class="size-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500">
+                        <span class="material-symbols-outlined">person</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-sm">Edit Profil</p>
+                        <p class="text-xs text-slate-400">Ubah nama, foto, dan info kontak</p>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                </a>
+
+                <a href="#"
+                    class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <div
+                        class="size-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500">
+                        <span class="material-symbols-outlined">notifications</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-sm">Notifikasi</p>
+                        <p class="text-xs text-slate-400">Atur suara dan getaran tugas baru</p>
+                    </div>
+                    <div class="relative inline-block w-10 align-middle select-none transition duration-200 ease-in">
+                        <input type="checkbox" checked
+                            class="toggle-checkbox absolute block w-5 h-5 rounded-full bg-white border-2 appearance-none cursor-pointer border-slate-300 checked:right-0 checked:border-green-500 transition-all duration-300 top-0" />
+                        <label
+                            class="toggle-label block overflow-hidden h-5 rounded-full bg-slate-300 cursor-pointer checked:bg-green-500 transition-all duration-300"></label>
+                    </div>
+                </a>
+
+                <a href="#"
+                    class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <div
+                        class="size-10 rounded-full bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-slate-500">
+                        <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-sm">Keamanan</p>
+                        <p class="text-xs text-slate-400">Ubah password & PIN</p>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-300">chevron_right</span>
+                </a>
+
+            </div>
+
+            <div
+                class="bg-white dark:bg-slate-800 rounded-2xl border border-slate-100 dark:border-slate-700 shadow-sm divide-y divide-slate-100 dark:divide-slate-700">
+                <a href="../index.html"
+                    class="flex items-center gap-4 p-4 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors text-red-500">
+                    <div
+                        class="size-10 rounded-full bg-red-50 dark:bg-red-900/20 flex items-center justify-center text-red-500">
+                        <span class="material-symbols-outlined">logout</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-bold text-sm">Keluar</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <p class="text-center text-xs text-slate-400 pt-4">Versi Aplikasi 2.1.0 (Build 305)</p>
+
+    </main>
+
+    <!-- Bottom Nav -->
+    <nav
+        class="fixed bottom-0 left-0 right-0 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pb-safe z-40">
+        <div class="flex justify-around items-center h-16">
+            <a href="index.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+                <span class="material-symbols-outlined">home_repair_service</span>
+                <span class="text-[10px] font-medium">Tugas</span>
+            </a>
+            <a href="history.html" class="flex flex-col items-center gap-1 text-slate-400 hover:text-slate-600">
+                <span class="material-symbols-outlined">history</span>
+                <span class="text-[10px] font-medium">Riwayat</span>
+            </a>
+            <a href="profile.html" class="flex flex-col items-center gap-1 text-primary">
+                <span class="material-symbols-outlined">person</span>
+                <span class="text-[10px] font-bold">Profil</span>
+            </a>
+        </div>
+    </nav>
+</body>
+
+</html>

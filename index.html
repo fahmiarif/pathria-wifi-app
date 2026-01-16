@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+    <title>Login - Pathria PPOB</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#0f172a",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bg-pattern {
+            background-color: #258cf4;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark text-slate-800 dark:text-slate-100 font-display flex flex-col min-h-screen">
+
+    <!-- Hero Section -->
+    <div class="bg-pattern h-64 w-full rounded-b-[3rem] relative flex items-center justify-center shadow-lg">
+        <div class="text-center text-white p-6 pb-10">
+            <div
+                class="bg-white/20 backdrop-blur-md size-20 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-white/20 shadow-inner">
+                <span class="material-symbols-outlined text-5xl">wifi_tethering</span>
+            </div>
+            <h1 class="text-3xl font-extrabold tracking-tight mb-1">Pathria PPOB</h1>
+            <p class="text-blue-100 text-sm font-medium">Solusi Internet & Pembayaran Digital</p>
+        </div>
+    </div>
+
+    <!-- Login Card -->
+    <div class="flex-1 px-6 -mt-10 pb-8 relative z-10 max-w-md mx-auto w-full">
+
+        <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-100 dark:border-slate-800">
+
+            <!-- Role Tabs -->
+            <div class="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-xl mb-6">
+                <button onclick="switchRole('user')" id="tab-user"
+                    class="flex-1 py-2.5 text-xs font-bold rounded-lg transition-all shadow bg-white text-primary dark:bg-slate-700 dark:text-white">Pelanggan</button>
+                <button onclick="switchRole('admin')" id="tab-admin"
+                    class="flex-1 py-2.5 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 transition-all">Admin</button>
+                <button onclick="switchRole('tech')" id="tab-tech"
+                    class="flex-1 py-2.5 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-700 dark:text-slate-400 transition-all">Teknisi</button>
+            </div>
+
+            <!-- Header Text (Dynamic) -->
+            <div class="mb-6">
+                <h2 id="login-title" class="text-xl font-bold text-slate-800 dark:text-white">Login Pelanggan</h2>
+                <p id="login-desc" class="text-xs text-slate-500 mt-1">Masuk untuk cek tagihan & layanan.</p>
+            </div>
+
+            <form onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1.5 ml-1">Email / ID Pelanggan</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-slate-400 text-lg">person</span>
+                        </div>
+                        <input type="text" id="username"
+                            class="w-full pl-10 pr-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-800 text-sm focus:border-primary focus:ring-primary font-bold placeholder:font-normal"
+                            placeholder="user@pathria.net" value="user@pathria.net" required>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-500 mb-1.5 ml-1">Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                            <span class="material-symbols-outlined text-slate-400 text-lg">lock</span>
+                        </div>
+                        <input type="password"
+                            class="w-full pl-10 pr-10 py-3 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-800 text-sm focus:border-primary focus:ring-primary font-bold placeholder:font-normal"
+                            placeholder="••••••••" value="password" required>
+                        <button type="button"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600">
+                            <span class="material-symbols-outlined text-lg">visibility</span>
+                        </button>
+                    </div>
+                    <div class="text-right mt-1">
+                        <a href="#" class="text-[10px] font-bold text-primary hover:underline">Lupa Password?</a>
+                    </div>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit" id="btn-submit"
+                        class="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-500/30 transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                        <span>Masuk Sekarang</span>
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </button>
+                </div>
+            </form>
+
+            <div class="mt-6 pt-6 border-t border-slate-100 dark:border-slate-800 text-center">
+                <p class="text-xs text-slate-500">Belum punya akun? <a href="#"
+                        class="text-primary font-bold hover:underline">Daftar Baru</a></p>
+            </div>
+
+        </div>
+
+        <p class="text-center text-[10px] text-slate-400 mt-8 font-medium">© 2026 Pathria PPOB System. All Rights
+            Reserved.</p>
+    </div>
+
+    <!-- Alert Modal -->
+    <div id="toast"
+        class="fixed top-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white px-4 py-3 rounded-full flex items-center gap-2 shadow-2xl z-50 transition-all duration-300 opacity-0 -translate-y-10">
+        <span class="material-symbols-outlined text-green-400">check_circle</span>
+        <span class="text-xs font-bold" id="toast-msg">Login Berhasil!</span>
+    </div>
+
+    <script>
+        let currentRole = 'user';
+
+        function switchRole(role) {
+            currentRole = role;
+
+            // Reset Tabs
+            ['user', 'admin', 'tech'].forEach(r => {
+                const btn = document.getElementById(`tab-${r}`);
+                if (r === role) {
+                    btn.classList.add('bg-white', 'text-primary', 'shadow', 'dark:bg-slate-700', 'dark:text-white');
+                    btn.classList.remove('text-slate-500', 'hover:text-slate-700');
+                } else {
+                    btn.classList.remove('bg-white', 'text-primary', 'shadow', 'dark:bg-slate-700', 'dark:text-white');
+                    btn.classList.add('text-slate-500', 'hover:text-slate-700');
+                }
+            });
+
+            // Update Text
+            const title = document.getElementById('login-title');
+            const desc = document.getElementById('login-desc');
+            const userBox = document.getElementById('username');
+
+            if (role === 'user') {
+                title.innerText = "Login Pelanggan";
+                desc.innerText = "Masuk untuk cek tagihan & layanan.";
+                userBox.placeholder = "user@pathria.net";
+                userBox.value = "";
+            } else if (role === 'admin') {
+                title.innerText = "Login Administrator";
+                desc.innerText = "Akses panel kontrol sistem.";
+                userBox.placeholder = "admin@pathria.net";
+                userBox.value = "";
+            } else {
+                title.innerText = "Login Teknisi";
+                desc.innerText = "Masuk tugas lapangan & perbaikan.";
+                userBox.placeholder = "tech@pathria.net";
+                userBox.value = "";
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btn-submit');
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> Memproses...';
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            setTimeout(() => {
+                showToast(`Selamat Datang, ${currentRole.toUpperCase()}!`);
+
+                setTimeout(() => {
+                    if (currentRole === 'user') window.location.href = 'dashboard.html';
+                    else if (currentRole === 'admin') window.location.href = 'admin/index.html'; // Adjust logic later
+                    else if (currentRole === 'tech') window.location.href = 'technician/index.html';
+                }, 1000);
+            }, 1000);
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = msg;
+            toast.classList.remove('opacity-0', '-translate-y-10');
+            toast.classList.add('translate-y-0');
+        }
+    </script>
+</body>
+
+</html>

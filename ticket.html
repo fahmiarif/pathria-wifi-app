@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="light" lang="id">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tiket Bantuan</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#258cf4",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#101922",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark text-[#0d141c] dark:text-slate-100 font-display relative">
+
+    <!-- Header -->
+    <header class="bg-primary pb-16 pt-4 px-4 sticky top-0 z-40 shadow-sm">
+        <div class="flex items-center gap-4 mb-4">
+            <a href="dashboard.html"
+                class="flex size-10 items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <h1 class="text-lg font-bold text-white">Tiket Bantuan</h1>
+        </div>
+
+        <!-- Status Summary -->
+        <div class="grid grid-cols-2 gap-3 mt-2">
+            <div
+                class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 flex items-center gap-3 shadow-lg shadow-black/5">
+                <div class="bg-orange-500/20 p-2 rounded-full text-orange-200 ring-1 ring-orange-500/30">
+                    <span class="material-symbols-outlined text-xl">pending_actions</span>
+                </div>
+                <div>
+                    <p class="text-white text-xl font-bold leading-none">0</p>
+                    <p class="text-white/70 text-[10px] uppercase font-bold tracking-wider mt-1">Diproses</p>
+                </div>
+            </div>
+            <div
+                class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-3 flex items-center gap-3 shadow-lg shadow-black/5">
+                <div class="bg-green-500/20 p-2 rounded-full text-green-200 ring-1 ring-green-500/30">
+                    <span class="material-symbols-outlined text-xl">assignment_turned_in</span>
+                </div>
+                <div>
+                    <p class="text-white text-xl font-bold leading-none">12</p>
+                    <p class="text-white/70 text-[10px] uppercase font-bold tracking-wider mt-1">Selesai</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="px-4 -mt-8 pb-24 relative z-50 flex flex-col gap-6">
+
+        <!-- Active Ticket Card (Empty State) -->
+        <!-- Use hidden class to toggle if there are tickets -->
+        <div class="bg-white dark:bg-slate-800 rounded-2xl p-6 shadow-sm text-center py-10">
+            <div
+                class="bg-green-50 mobile-icon mx-auto size-16 rounded-full flex items-center justify-center text-green-500 mb-3">
+                <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <h3 class="font-bold text-lg mb-1">Layanan Normal</h3>
+            <p class="text-slate-500 text-sm">Tidak ada gangguan yang dilaporkan saat ini.</p>
+        </div>
+
+        <!-- Create New Ticket -->
+        <a href="ticket-create.html"
+            class="w-full bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm flex items-center justify-between group active:scale-98 transition-transform">
+            <div class="flex items-center gap-4">
+                <div class="bg-primary/10 text-primary p-3 rounded-xl">
+                    <span class="material-symbols-outlined">add_circle</span>
+                </div>
+                <div class="text-left">
+                    <p class="font-bold">Buat Tiket Baru</p>
+                    <p class="text-xs text-slate-500">Laporkan masalah koneksi atau layanan</p>
+                </div>
+            </div>
+            <span
+                class="material-symbols-outlined text-slate-300 group-hover:text-primary transition-colors">chevron_right</span>
+        </a>
+
+        <!-- History Section -->
+        <div>
+            <h3 class="font-bold text-lg mb-4 px-1">Riwayat Tiket</h3>
+            <div class="flex flex-col gap-3">
+                <!-- Ticket Item -->
+                <a href="ticket-detail.html"
+                    class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-100 dark:border-slate-700 block active:scale-[0.98] transition-transform shadow-sm">
+                    <div class="flex gap-4">
+                        <div
+                            class="bg-blue-50 dark:bg-slate-700 rounded-full size-10 flex items-center justify-center text-blue-500 dark:text-blue-400 shrink-0">
+                            <span class="material-symbols-outlined">speed</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-1">
+                                <span
+                                    class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded-full">SELESAI</span>
+                                <span class="text-[10px] text-slate-400">10 Jan 2026</span>
+                            </div>
+                            <p class="font-bold text-sm mb-1 truncate">Internet Lambat (Slow Connection)</p>
+                            <p class="text-xs text-slate-500 line-clamp-2">Kecepatan internet drop di malam hari, mohon
+                                dicek segera karena saya butuh buat kerja.</p>
+                        </div>
+                    </div>
+                </a>
+                <!-- Ticket Item -->
+                <a href="ticket-detail.html"
+                    class="bg-white dark:bg-slate-800 rounded-xl p-4 border border-slate-100 dark:border-slate-700 block active:scale-[0.98] transition-transform shadow-sm">
+                    <div class="flex gap-4">
+                        <div
+                            class="bg-red-50 dark:bg-slate-700 rounded-full size-10 flex items-center justify-center text-red-500 dark:text-red-400 shrink-0">
+                            <span class="material-symbols-outlined">wifi_off</span>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-1">
+                                <span
+                                    class="bg-green-100 text-green-700 text-[10px] font-bold px-2 py-0.5 rounded-full">SELESAI</span>
+                                <span class="text-[10px] text-slate-400">02 Des 2025</span>
+                            </div>
+                            <p class="font-bold text-sm mb-1 truncate">Tidak Ada Koneksi (LoS)</p>
+                            <p class="text-xs text-slate-500 line-clamp-2">Lampu indikator modem merah berkedip sejak
+                                tadi sore setelah hujan besar.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
